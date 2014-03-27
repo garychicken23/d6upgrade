@@ -928,7 +928,7 @@ function file_transfer($source, $headers) {
   // IE cannot download private files because it cannot store files downloaded
   // over HTTPS in the browser cache. The problem can be solved by sending
   // custom headers to IE. See http://support.microsoft.com/kb/323308/en-us
-  if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) {
+  if ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) || $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
     drupal_set_header('Cache-Control: private');
     drupal_set_header('Pragma: private');
   }
