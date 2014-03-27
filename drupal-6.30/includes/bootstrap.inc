@@ -1,5 +1,6 @@
-<?php
 
+<?php
+// this line should only be seen at smc branch 
 /**
  * @file
  * Functions that need to be loaded on every Drupal request.
