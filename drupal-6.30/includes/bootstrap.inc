@@ -1,6 +1,5 @@
-
 <?php
-// this line should only be seen at smc branch 
+
 /**
  * @file
  * Functions that need to be loaded on every Drupal request.
@@ -990,6 +989,10 @@ function watchdog($type, $message, $variables = array(), $severity = WATCHDOG_NO
  *   be repeated.
  */
 function drupal_set_message($message = NULL, $type = 'status', $repeat = TRUE) {
+  //filter out strict warnings due to conflicts between views-2.x and PHP 5.4
+  if(!strncmp($message, 'strict warning:', 14)) {
+    return isset($_SESSION['messages']) ? $_SESSION['messages'] : NULL;
+  }
   if ($message) {
     if (!isset($_SESSION['messages'])) {
       $_SESSION['messages'] = array();
